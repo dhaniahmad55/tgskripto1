@@ -1,33 +1,34 @@
-import string
+print ("Ahmad Dhani Ali")
+print ("E1E119043")
+def encript(plaintext, key):
+    encoded = []
 
-abjad = string.printable
+    for i in range(len(plaintext)):
+        xor = ord(plaintext[i]) ^ ord(key[i % len(key)])
+        encoded.append(chr(xor))
 
+    return ''.join(encoded)
 
-key = int(input('Masukkan cipher key : '))
+def decript(chipertext, key):
+    return encript(chipertext, key)
 
+def main():
+    print("Pilih Menu: \n1. Enkripsi\n2. Dekripsi")
+    pilihan = int(input("Pilihan: "))
 
-def encode(pesan, cipher_key):
-    pesan = pesan.lower()
-    hasilencode = ''
-    for karakter in pesan:
-        if karakter in abjad:
-            indexlama = abjad.index(karakter)
-            indexbaru = (indexlama + cipher_key) % len(abjad)
-            abjadbaru = abjad[indexbaru]
-            hasilencode = hasilencode + abjadbaru
-        else:
-            hasilencode = hasilencode + ' '
-    return hasilencode
+    if pilihan == 1:
+        plaintext = str(input("Masukkan plaintext: "))
+        key = str(input("Masukkan key: "))
 
+        print("Plaintext: ", plaintext)
+        print("Enkripsi: ", encript(plaintext, key))
+    elif pilihan == 2:
+        chipertext = str(input("Masukkan chipertext: "))
+        key = str(input("Masukkan key: "))
 
-pesan = input('Masukkan kalimat yang ingin dienkripsi : ')
-# ENKRIPSI
-pesanhasil = encode(pesan, key)
-print('Masukkan kalimat:', pesan)
-print('Hasil enkripsi kalimat dengan key', key, 'adalah : ', pesanhasil)
+        print("Chipertext: ", chipertext)
+        print("Dekripsi: ", decript(chipertext, key))
+    else:
+        exit()
 
-# DEKRIPSI
-
-pesanawal = encode(pesanhasil, -key)
-print('hasil dienkripsi ulang kalimat key ',
-      -key, 'adalah : ', pesanawal)
+main()
